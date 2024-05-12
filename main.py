@@ -75,7 +75,7 @@ async def search_image(image: Image):
         with open(img_path, "wb") as f:
             f.write(image_data)
 
-        for result in DeepFace.find(img_path=img_path, db_path='G:/dala-2024', detector_backend=backend, model_name=model): #thay db_path thành đường dẫn đến folder muốn phân tích
+        for result in DeepFace.find(img_path=img_path, db_path=folder_search, detector_backend=backend, model_name=model): #thay db_path thành đường dẫn đến folder muốn phân tích
             for img in result.iloc[:,0]:
                 matching_images.append(img)
     except FileNotFoundError as e:
@@ -194,7 +194,7 @@ def read_and_store_ocr_data(folder_data_search):
 
             # Tạo ra dữ liệu OCR nếu không tồn tại
             reader = easyocr.Reader(["en"], gpu=True)
-            for filename in os.listdir('G:/dala-2024'): #Thay folder_data_search thành đường dẫn đén foler ảnh cần phân tích
+            for filename in os.listdir(folder_data_search): #Thay folder_data_search thành đường dẫn đén foler ảnh cần phân tích
                 if filename.endswith((".jpg", ".jpeg", ".png", ".bmp", ".gif")):
                     img_path = os.path.join(folder_data_search, filename)
                     if filename in ocr_data:
