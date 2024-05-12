@@ -71,11 +71,10 @@ async def search_image(image: Image):
 
         image_name = os.urandom(24).hex() + "." + image.type
         img_path = folder_search + "/" + image_name
-
         with open(img_path, "wb") as f:
             f.write(image_data)
 
-        for result in DeepFace.find(img_path=img_path, db_path=folder_search, detector_backend=backend, model_name=model): #thay db_path thành đường dẫn đến folder muốn phân tích
+        for result in DeepFace.find(img_path=img_path, db_path=folder_data_search, detector_backend=backend, model_name=model): #thay db_path thành đường dẫn đến folder muốn phân tích
             for img in result.iloc[:,0]:
                 matching_images.append(img)
     except FileNotFoundError as e:
